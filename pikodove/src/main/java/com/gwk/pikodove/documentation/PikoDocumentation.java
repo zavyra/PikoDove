@@ -37,6 +37,7 @@ public class PikoDocumentation {
         ArrayList<Field> shortType = new ArrayList<>();
         ArrayList<Field> intType = new ArrayList<>();
         ArrayList<Field> longType = new ArrayList<>();
+        ArrayList<Field> charType = new ArrayList<>();
         ArrayList<Field> floatType = new ArrayList<>();
         ArrayList<Field> doubleType = new ArrayList<>();
         ArrayList<Field> fixedLengthType = new ArrayList<>();
@@ -59,6 +60,8 @@ public class PikoDocumentation {
                 intType.add(field);
             } else if (fieldType == Long.TYPE) {
                 longType.add(field);
+            } else if (fieldType == Character.TYPE) {
+                charType.add(field);
             } else if (fieldType == Float.TYPE) {
                 floatType.add(field);
             } else if (fieldType == Double.TYPE) {
@@ -96,6 +99,12 @@ public class PikoDocumentation {
         }
 
         for (Field field : longType) {
+            if((index + 1) % 8 == 0) index++;
+            sb.append(String.format("%6d", index++)).append(" | ")
+                    .append(field.getName()).append(" (long) \n");
+        }
+
+        for (Field field : charType) {
             if((index + 1) % 8 == 0) index++;
             sb.append(String.format("%6d", index++)).append(" | ")
                     .append(field.getName()).append(" (long) \n");
