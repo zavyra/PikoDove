@@ -42,6 +42,21 @@ public class User {
         this.name = "Garuda Wisnu Kencana";
     }
 
+
+    public void setByEmptyValue() {
+        this.isAdmin = false;
+        this.accessLevel = 0;
+        this.type = 0;
+        this.currentBalance = 0;
+        this.totalPoint = 0;
+        this.initial = 0;
+        this.avgBalance = 0;
+        this.avgPoint = 0;
+        this.kodepos = "";
+        this.address = null;
+        this.name = null;
+    }
+
     public void fromJsonObject(String jsonObject) throws JSONException {
         JSONObject j = new JSONObject(jsonObject);
         this.isAdmin = j.getBoolean("isAdmin");
@@ -52,9 +67,9 @@ public class User {
         this.initial = (char) j.getInt("initial");
         this.avgBalance = (float) j.getDouble("avgBalance");
         this.avgPoint = j.getDouble("avgPoint");
-        this.kodepos = j.getString("kodepos");
-        this.address = j.getString("address");
-        this.name = j.getString("name");
+        this.kodepos = j.has("kodepos") ? j.getString("kodepos") : "";
+        this.address = j.has("address") ? j.getString("address") : null;
+        this.name = j.has("name") ? j.getString("name") : null;
     }
 
     @Override

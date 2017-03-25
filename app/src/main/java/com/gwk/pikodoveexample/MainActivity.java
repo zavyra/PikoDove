@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.gwk.pikodove.generator.PikoGenerator;
 import com.gwk.pikodove.generator.PikoGeneratorBlueprint;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnShowObjectRepresentation;
     private Button btnShowJsonRepresentation;
     private Button btnShowPikoRepresentation;
+    private ToggleButton tglBtnUsingDefaultValue;
     private Button btnTest;
     private TextView tvResult;
 
@@ -47,8 +50,12 @@ public class MainActivity extends AppCompatActivity {
         btnShowObjectRepresentation = (Button) findViewById(R.id.btnShowObjectRepresentation);
         btnShowJsonRepresentation = (Button) findViewById(R.id.btnShowJsonRepresentation);
         btnShowPikoRepresentation = (Button) findViewById(R.id.btnShowPikoRepresentation);
+        tglBtnUsingDefaultValue = (ToggleButton) findViewById(R.id.btnEmptyOrDefault);
         btnTest = (Button) findViewById(R.id.btnTest);
         tvResult = (TextView) findViewById(R.id.textViewResult);
+
+        tglBtnUsingDefaultValue.setChecked(true);
+        tvResult.setText("Using Default Value");
         initListeners();
     }
 
@@ -69,6 +76,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(MainActivity.this).setMessage(new String(pikoRepresentation)).show();
+            }
+        });
+        tglBtnUsingDefaultValue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    originalUser.setByDefaultValue();
+                    tvResult.setText("Using Default Value");
+                } else {
+                    originalUser.setByEmptyValue();
+                    tvResult.setText("Using Default Empty");
+                }
+
+                try {
+                    pikoRepresentation = PikoGenerator.fromClass(originalUser, new PikoGeneratorBlueprint(User.class));
+                    PikoParserBlueprint pikoParserBlueprint = new PikoParserBlueprint(User.class);
+                    parsedUser = (User) PikoParser.fromPiko(pikoRepresentation, pikoParserBlueprint);
+                } catch (IllegalAccessException | InstantiationException | IOException | NoSuchFieldException e) {
+                    e.printStackTrace();
+                }
             }
         });
         btnTest.setOnClickListener(new View.OnClickListener() {

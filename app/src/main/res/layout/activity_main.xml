@@ -38,6 +38,13 @@
                 android:layout_weight="1"
                 android:text="Show Piko Representation" />
 
+            <ToggleButton
+                android:id="@+id/btnEmptyOrDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ToggleButton" />
+
             <Button
                 android:id="@+id/btnTest"
                 android:layout_width="match_parent"
