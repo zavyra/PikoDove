@@ -15,9 +15,9 @@ public class PikoDocumentation {
         StringBuilder sb = new StringBuilder();
 
         // header
-        sb.append("=====================================\n");
+        sb.append("============================\n");
         sb.append(clazz.getName()).append("\n");
-        sb.append("=====================================\n");
+        sb.append("============================\n");
 
         // indexes
         sb.append("Index | Description\n");
@@ -138,7 +138,7 @@ public class PikoDocumentation {
         }
 
 
-        sb.append("=====================================\n");
+        sb.append("============================\n");
         int closestByte = (int) Math.ceil(index / 7f);
         sb.append("Total Index : ").append(index).append(" bit -> ").append(closestByte).append(" bytes");
         return sb.toString();
