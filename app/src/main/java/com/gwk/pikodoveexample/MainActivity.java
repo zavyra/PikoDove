@@ -11,6 +11,7 @@ import android.widget.ToggleButton;
 
 import com.gwk.pikodove.generator.PikoGenerator;
 import com.gwk.pikodove.generator.PikoGeneratorBlueprint;
+import com.gwk.pikodove.parser.Piko;
 import com.gwk.pikodove.parser.PikoParser;
 import com.gwk.pikodove.parser.PikoParserBlueprint;
 
@@ -108,26 +109,33 @@ public class MainActivity extends AppCompatActivity {
                 String result = "Json Data Length : " + lengthJson;
                 long startTime = System.nanoTime();
                 try {
-                    new User().fromJsonObject(jsonRepresentation);
+                    for (int i = 0; i < 1000; i++) {
+                        new User().fromJsonObject(jsonRepresentation);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 long endTime = System.nanoTime();
-                long durationJson = (endTime - startTime) / 1000;
+                long durationJson = (endTime - startTime) / 1000000;
                 result += "\nJson Data Parse Time : " + durationJson + " ms";
 
                 // piko
                 int lengthPiko = pikoRepresentation.length;
                 result += "\nPiko Data Length : " + lengthPiko;
                 PikoParserBlueprint pikoParserBlueprint = new PikoParserBlueprint(User.class);
+                User t = new User();
                 startTime = System.nanoTime();
                 try {
-                    parsedUser = (User) PikoParser.fromPiko(pikoRepresentation, pikoParserBlueprint);
-                } catch (IllegalAccessException | IOException | NoSuchFieldException | InstantiationException e) {
+                    for (int i = 0; i < 1000; i++) {
+                        t.fromPiko(new Piko(pikoRepresentation, pikoParserBlueprint));
+                    }
+                    //parsedUser = (User) PikoParser.fromPiko(pikoRepresentation, pikoParserBlueprint);
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
                 endTime = System.nanoTime();
-                long durationPiko = (endTime - startTime) / 1000;
+                System.out.println(t.toString());
+                long durationPiko = (endTime - startTime) / 1000000;
                 result += "\nPiko Data Parse Time : " + durationPiko + " ms";
                 result += "\nLength percentage : " + (((float)(lengthJson - lengthPiko) / (float)lengthJson) * 100f) + "%";
                 result += "\nDuration percentage : " + (((float)(durationJson - durationPiko) / (float)durationJson) * 100f) + "%";

@@ -2,6 +2,8 @@ package com.gwk.pikodoveexample;
 
 import com.gwk.pikodove.annotation.PikoFixedLength;
 import com.gwk.pikodove.annotation.PikoString;
+import com.gwk.pikodove.parser.Piko;
+import com.gwk.pikodove.parser.PikoParserBlueprint;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,5 +110,19 @@ public class User {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public void fromPiko(Piko piko) {
+        isAdmin = piko.readNextBoolean();
+        accessLevel = piko.readNextByte();
+        type = piko.readNextShort();
+        currentBalance = piko.readNextInt();
+        totalPoint = piko.readNextLong();
+        initial = piko.readNextChar();
+        avgBalance = piko.readNextFloat();
+        avgPoint = piko.readNextDouble();
+        kodepos = piko.readNextFixedString(6);
+        address = piko.readNextString('\n');
+        name = piko.readNextString();
     }
 }
