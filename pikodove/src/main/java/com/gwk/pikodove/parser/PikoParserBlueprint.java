@@ -1,5 +1,9 @@
 package com.gwk.pikodove.parser;
 
+import android.util.Pair;
+import android.util.SparseArray;
+import android.util.SparseIntArray;
+
 import com.gwk.pikodove.annotation.PikoFixedLength;
 import com.gwk.pikodove.annotation.PikoString;
 
@@ -14,6 +18,7 @@ public class PikoParserBlueprint {
 
     private final Class clazz;
     private ArrayList<Field> fields = new ArrayList<>();
+    private ArrayList<Pair<String,Integer>> fieldLengths = new ArrayList<>();
     private int indexLength;
 
     public PikoParserBlueprint(Class clazz) throws IllegalArgumentException {
@@ -39,6 +44,7 @@ public class PikoParserBlueprint {
             Class<?> fieldType = field.getType();
             if (fieldType == Boolean.TYPE) {
                 booleanType.add(field);
+                fieldLengths.add(new Pair<>(field.getName(), 0));
             } else if (fieldType == Byte.TYPE) {
                 byteType.add(field);
             } else if (fieldType == Short.TYPE) {
@@ -125,4 +131,7 @@ public class PikoParserBlueprint {
         return fields;
     }
 
+    public ArrayList<Pair<String, Integer>> getFieldLengths() {
+        return fieldLengths;
+    }
 }
