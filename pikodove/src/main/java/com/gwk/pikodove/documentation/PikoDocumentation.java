@@ -28,10 +28,11 @@ public class PikoDocumentation {
         // 2. short
         // 3. int
         // 4. long
-        // 5. float
-        // 6. double
-        // 7. fixed length string
-        // 8. dynamic string
+        // 5. char
+        // 6. float
+        // 7. double
+        // 8. fixed length string
+        // 9. dynamic string
 
         ArrayList<Field> booleanType = new ArrayList<>();
         ArrayList<Field> shortType = new ArrayList<>();
