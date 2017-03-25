@@ -4,7 +4,22 @@ PikoDove is a library using bitwise data format. Make data transfer efficient an
 
 ## Install
 
-TODO: fill this documentation
+Add jitpack repository
+```gradle
+repositories {
+    // another repositories
+    maven { url 'https://jitpack.io' }
+}
+```
+
+Add dependencies in build.gradle file
+```gradle
+
+dependencies {
+    // another dependencies
+    compile 'com.github.zavyra:PikoDove:0.1.2'
+}
+```
 
 ## Usage
 
