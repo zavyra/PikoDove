@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvResult;
 
     private User originalUser;
+    private String jsonRepresentation;
     private byte[] pikoRepresentation;
     private User parsedUser;
 
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         originalUser = new User();
         originalUser.setByDefaultValue();
-
+        jsonRepresentation = originalUser.toJsonObject();
         try {
             pikoRepresentation = PikoGenerator.fromClass(originalUser, new PikoGeneratorBlueprint(User.class));
             PikoParserBlueprint pikoParserBlueprint = new PikoParserBlueprint(User.class);
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     tvResult.setText("Using Default Empty");
                 }
 
+                jsonRepresentation = originalUser.toJsonObject();
                 try {
                     pikoRepresentation = PikoGenerator.fromClass(originalUser, new PikoGeneratorBlueprint(User.class));
                     PikoParserBlueprint pikoParserBlueprint = new PikoParserBlueprint(User.class);
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 String result = "Json Data Length : " + lengthJson;
                 long startTime = System.nanoTime();
                 try {
-                    new User().fromJsonObject(originalUser.toJsonObject());
+                    new User().fromJsonObject(jsonRepresentation);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
