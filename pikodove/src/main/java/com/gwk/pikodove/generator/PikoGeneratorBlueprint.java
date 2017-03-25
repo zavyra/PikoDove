@@ -65,7 +65,8 @@ public class PikoGeneratorBlueprint {
                 }
             }
             indexLength++;
-            if(indexLength % 8 == 0) indexLength ++;
+            // TODO : next version using tail bit
+            //if(indexLength % 8 == 0) indexLength ++;
         }
     }
 
