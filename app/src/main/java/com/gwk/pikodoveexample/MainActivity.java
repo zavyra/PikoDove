@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.gwk.pikodove.documentation.PikoDocumentation;
 import com.gwk.pikodove.generator.PikoGenerator;
 import com.gwk.pikodove.generator.PikoGeneratorBlueprint;
 import com.gwk.pikodove.parser.Piko;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnShowObjectRepresentation;
     private Button btnShowJsonRepresentation;
     private Button btnShowPikoRepresentation;
+    private Button btnShowPikoContract;
     private ToggleButton tglBtnUsingDefaultValue;
     private Button btnTest;
     private TextView tvResult;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btnShowObjectRepresentation = (Button) findViewById(R.id.btnShowObjectRepresentation);
         btnShowJsonRepresentation = (Button) findViewById(R.id.btnShowJsonRepresentation);
         btnShowPikoRepresentation = (Button) findViewById(R.id.btnShowPikoRepresentation);
+        btnShowPikoContract = (Button) findViewById(R.id.btnShowPikoContract);
         tglBtnUsingDefaultValue = (ToggleButton) findViewById(R.id.btnEmptyOrDefault);
         btnTest = (Button) findViewById(R.id.btnTest);
         tvResult = (TextView) findViewById(R.id.textViewResult);
@@ -78,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(MainActivity.this).setMessage(new String(pikoRepresentation)).show();
+            }
+        });
+        btnShowPikoContract.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    new AlertDialog.Builder(MainActivity.this).setMessage(PikoDocumentation.fromClass(User.class)).show();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         tglBtnUsingDefaultValue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
