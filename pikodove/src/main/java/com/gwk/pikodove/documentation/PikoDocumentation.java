@@ -118,7 +118,7 @@ public class PikoDocumentation {
         for (Field field : charType) {
             if((index + 1) % 8 == 0) index++;
             sb.append(String.format("%6d", index++)).append(" | ")
-                    .append(field.getName()).append(" (long) \n");
+                    .append(field.getName()).append(" (char) \n");
         }
 
         for (Field field : floatType) {
