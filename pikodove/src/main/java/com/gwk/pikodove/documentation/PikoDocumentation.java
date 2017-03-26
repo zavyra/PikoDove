@@ -25,16 +25,18 @@ public class PikoDocumentation {
 
         // make list type by priority :
         // 1. boolean
-        // 2. short
-        // 3. int
-        // 4. long
-        // 5. char
-        // 6. float
-        // 7. double
-        // 8. fixed length string
-        // 9. dynamic string
+        // 2. byte
+        // 3. short
+        // 4. int
+        // 5. long
+        // 6. char
+        // 7. float
+        // 8. double
+        // 9. fixed length string
+        // 10. dynamic string
 
         ArrayList<Field> booleanType = new ArrayList<>();
+        ArrayList<Field> byteType = new ArrayList<>();
         ArrayList<Field> shortType = new ArrayList<>();
         ArrayList<Field> intType = new ArrayList<>();
         ArrayList<Field> longType = new ArrayList<>();
@@ -55,6 +57,8 @@ public class PikoDocumentation {
             Class<?> fieldType = field.getType();
             if (fieldType == Boolean.TYPE) {
                 booleanType.add(field);
+            } else if(fieldType == Byte.TYPE) {
+                byteType.add(field);
             } else if (fieldType == Short.TYPE) {
                 shortType.add(field);
             } else if (fieldType == Integer.TYPE) {
@@ -85,6 +89,12 @@ public class PikoDocumentation {
             if((index + 1) % 8 == 0) index++;
             sb.append(String.format("%6d", index++)).append(" | ")
                     .append(field.getName()).append(" (boolean) \n");
+        }
+
+        for (Field field : byteType) {
+            if((index + 1) % 8 == 0) index++;
+            sb.append(String.format("%6d", index++)).append(" | ")
+                    .append(field.getName()).append(" (byte) \n");
         }
 
         for (Field field : shortType) {
