@@ -19,7 +19,7 @@ Add dependencies in build.gradle file
 
 dependencies {
     // another dependencies
-    compile 'com.github.zavyra:PikoDove:0.1.2'
+    compile 'com.github.zavyra:PikoDove:0.1.3'
 }
 ```
 
