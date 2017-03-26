@@ -2,6 +2,8 @@
 
 PikoDove is a library using bitwise data format. Make data transfer efficient and efective.
 
+For more information read [Wiki](https://github.com/zavyra/PikoDove/wiki)
+
 ## Install
 
 Add jitpack repository
